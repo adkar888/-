@@ -16,14 +16,26 @@
         }
         body {
             font-family: 'Tajawal', sans-serif;
-            background: #1a0f0a; /* بني غامق جداً */
+            background: #1a0f0a;
             min-height: 100vh;
             padding: 30px 20px 50px;
-            color: #f5e6d3; /* بني فاتح جداً (نص) */
+            color: #f5e6d3;
         }
         .container {
             max-width: 1400px;
             margin: 0 auto;
+        }
+        /* الشعار */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%; /* إذا أردت شعار دائري، يمكنك إزالة هذه الخاصية */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 3px solid #c49a6c;
         }
         /* تبديل اللغة */
         .lang-switch {
@@ -32,7 +44,7 @@
             margin-bottom: 20px;
         }
         .lang-btn {
-            background: #8b5a2b; /* بني */
+            background: #8b5a2b;
             color: #f5e6d3;
             border: none;
             padding: 10px 25px;
@@ -43,7 +55,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            border: 2px solid #c49a6c; /* بني فاتح */
+            border: 2px solid #c49a6c;
             transition: 0.2s;
         }
         .lang-btn:hover {
@@ -52,7 +64,7 @@
         }
         /* قسم المواقيت */
         .prayer-section {
-            background: #2c1a12; /* بني غامق */
+            background: #2c1a12;
             backdrop-filter: blur(10px);
             border-radius: 50px;
             padding: 25px;
@@ -492,6 +504,11 @@
             </button>
         </div>
 
+        <!-- الشعار -->
+        <div class="logo-container">
+            <img src="image1.png" alt="شعار أذكار" class="logo">
+        </div>
+
         <!-- قسم المواقيت -->
         <div class="prayer-section">
             <div class="location-selector">
@@ -719,9 +736,8 @@
             }
         };
 
-        let currentLang = 'ar'; // اللغة الافتراضية
+        let currentLang = 'ar';
 
-        // عناصر قابلة للترجمة
         const langElements = {
             siteTitle: document.getElementById('siteTitle'),
             selectCityOption: document.getElementById('selectCityOption'),
@@ -768,7 +784,6 @@
             langElements.noResults.textContent = t.noResults;
             langElements.footerText.textContent = t.footer;
             langElements.langText.textContent = t.langToggle;
-            // عناصر المودال
             langElements.thDay.textContent = t.thDay;
             langElements.thDate.textContent = t.thDate;
             langElements.thImsak.textContent = t.thImsak;
@@ -776,12 +791,10 @@
             langElements.thMaghrib.textContent = t.thMaghrib;
             langElements.closeModalBtn.textContent = t.closeModal;
 
-            // تحديث اتجاه الصفحة حسب اللغة
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.documentElement.lang = lang;
         }
 
-        // زر تبديل اللغة
         document.getElementById('langToggle').addEventListener('click', () => {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             applyLanguage(currentLang);
@@ -967,7 +980,6 @@
                 
                 if (data.code === 200) {
                     const timings = data.data.timings;
-                    const date = data.data.date.readable;
                     
                     imsakEl.textContent = timings.Imsak || adjustTime(timings.Fajr, -10);
                     fajrEl.textContent = timings.Fajr;
@@ -1073,7 +1085,6 @@
             }
         });
 
-        // تهيئة الأذكار
         filterAndRender();
         searchInput.addEventListener('input', filterAndRender);
         favoriteToggle.addEventListener('click', function() {
@@ -1082,7 +1093,6 @@
             filterAndRender();
         });
 
-        // تطبيق اللغة الافتراضية
         applyLanguage('ar');
     </script>
 </body>
