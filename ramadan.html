@@ -14,26 +14,39 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* متغيرات الألوان للوضع الليلي (الافتراضي) */
         body {
             font-family: 'Tajawal', sans-serif;
-            background: #1a0f0a;
+            background-color: #000000;
+            color: #ffffff;
             min-height: 100vh;
             padding: 30px 20px 50px;
-            color: #f5e6d3;
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        /* الوضع النهاري */
+        body.light-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-        /* تبديل اللغة */
-        .lang-switch {
+
+        /* شريط الأزرار العلوي (اللغة + الوضع) */
+        .top-bar {
             display: flex;
             justify-content: flex-end;
+            gap: 15px;
             margin-bottom: 20px;
         }
-        .lang-btn {
-            background: #8b5a2b;
-            color: #f5e6d3;
+
+        .lang-btn, .mode-btn {
+            background: #333333;
+            color: #ffffff;
             border: none;
             padding: 10px 25px;
             border-radius: 40px;
@@ -43,14 +56,27 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            border: 2px solid #c49a6c;
+            border: 1px solid #777777;
             transition: 0.2s;
         }
-        .lang-btn:hover {
-            background: #c49a6c;
-            color: #1a0f0a;
+
+        body.light-mode .lang-btn,
+        body.light-mode .mode-btn {
+            background: #e0e0e0;
+            color: #000000;
+            border-color: #888888;
         }
-        /* الشعار - بدون أي زوائد */
+
+        .lang-btn:hover, .mode-btn:hover {
+            background: #555555;
+        }
+
+        body.light-mode .lang-btn:hover,
+        body.light-mode .mode-btn:hover {
+            background: #c0c0c0;
+        }
+
+        /* الشعار - بدون أي حواف، ويتم تغيير الصورة عبر JS */
         .logo-container {
             text-align: center;
             margin-bottom: 30px;
@@ -59,8 +85,8 @@
             max-width: 180px;
             height: auto;
             display: inline-block;
-            /* تمت إزالة border, border-radius, box-shadow */
         }
+
         /* شريط البحث */
         .search-section {
             display: flex;
@@ -80,7 +106,7 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #5a3a1e;
+            color: #666666;
             font-size: 1.4rem;
         }
         .search-box input {
@@ -89,36 +115,59 @@
             border-radius: 60px;
             border: 2px solid transparent;
             font-size: 1.3rem;
-            background: #f5e6d3;
+            background: #222222;
             font-family: 'Tajawal', sans-serif;
-            color: #1a0f0a;
+            color: #ffffff;
+            transition: 0.2s;
+        }
+        body.light-mode .search-box input {
+            background: #f0f0f0;
+            color: #000000;
+            border-color: #cccccc;
         }
         .search-box input:focus {
             outline: none;
-            border-color: #c49a6c;
-            background: #ffffff;
+            border-color: #888888;
+            background: #333333;
         }
+        body.light-mode .search-box input:focus {
+            background: #ffffff;
+            border-color: #666666;
+        }
+
         .favorite-toggle {
-            background: #c49a6c;
-            border: 2px solid #8b5a2b;
+            background: #333333;
+            border: 1px solid #777777;
             border-radius: 60px;
             padding: 15px 30px;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1a0f0a;
+            color: #ffffff;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 15px;
             white-space: nowrap;
+            transition: 0.2s;
+        }
+        body.light-mode .favorite-toggle {
+            background: #e0e0e0;
+            color: #000000;
+            border-color: #888888;
         }
         .favorite-toggle i {
-            color: #1a0f0a;
+            color: inherit;
         }
         .favorite-toggle.active {
-            background: #8b5a2b;
-            color: #f5e6d3;
+            background: #555555;
+            color: #ffffff;
+            border-color: #aaaaaa;
         }
+        body.light-mode .favorite-toggle.active {
+            background: #c0c0c0;
+            color: #000000;
+        }
+
         /* أزرار الفئات */
         .category-buttons {
             display: flex;
@@ -128,72 +177,90 @@
             margin-bottom: 40px;
         }
         .cat-btn {
-            background: #2c1a12;
-            border: 2px solid #c49a6c;
+            background: #222222;
+            border: 1px solid #666666;
             border-radius: 60px;
             padding: 15px 30px;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #f5e6d3;
+            color: #ffffff;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 15px;
             transition: 0.3s;
-            box-shadow: 0 5px 0 #5a3a1e;
+            box-shadow: 0 5px 0 #111111;
+        }
+        body.light-mode .cat-btn {
+            background: #e0e0e0;
+            color: #000000;
+            border-color: #888888;
+            box-shadow: 0 5px 0 #aaaaaa;
         }
         .cat-btn i {
             font-size: 1.8rem;
-            color: #c49a6c;
+            color: inherit;
         }
         .cat-btn.active {
-            background: #c49a6c;
-            color: #1a0f0a;
-            border-color: #8b5a2b;
+            background: #444444;
+            color: #ffffff;
+            border-color: #aaaaaa;
             transform: translateY(-3px);
-            box-shadow: 0 8px 0 #5a3a1e;
+            box-shadow: 0 8px 0 #222222;
         }
-        .cat-btn.active i {
-            color: #1a0f0a;
+        body.light-mode .cat-btn.active {
+            background: #c0c0c0;
+            color: #000000;
+            border-color: #666666;
+            box-shadow: 0 8px 0 #888888;
         }
         .cat-btn:hover {
-            background: #c49a6c;
-            color: #1a0f0a;
+            background: #444444;
+            color: #ffffff;
             transform: translateY(-3px);
-            box-shadow: 0 8px 0 #5a3a1e;
+            box-shadow: 0 8px 0 #222222;
         }
-        .cat-btn:hover i {
-            color: #1a0f0a;
+        body.light-mode .cat-btn:hover {
+            background: #c0c0c0;
+            color: #000000;
+            box-shadow: 0 8px 0 #888888;
         }
+
         /* شبكة البطاقات */
         .grid {
-            display: none;
+            display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 20px;
         }
-        .grid.visible {
-            display: grid;
-        }
         .card {
-            background: #f5e6d3;
+            background: #222222;
             border-radius: 40px;
             padding: 25px 20px 20px;
-            box-shadow: 0 20px 30px -8px #00000080, 0 0 0 1px #c49a6c inset;
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.8), 0 0 0 1px #555555 inset;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid #8b5a2b;
+            border: 1px solid #444444;
+        }
+        body.light-mode .card {
+            background: #f8f8f8;
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.2), 0 0 0 1px #cccccc inset;
+            border-color: #bbbbbb;
         }
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 40px -5px #000, 0 0 0 2px #8b5a2b inset;
+            box-shadow: 0 25px 40px -5px #000000, 0 0 0 2px #777777 inset;
         }
+        body.light-mode .card:hover {
+            box-shadow: 0 25px 40px -5px rgba(0,0,0,0.3), 0 0 0 2px #aaaaaa inset;
+        }
+
         .favorite-btn {
             position: absolute;
             top: 15px;
             left: 15px;
-            background: white;
+            background: #333333;
             border: none;
             width: 50px;
             height: 50px;
@@ -204,53 +271,82 @@
             font-size: 1.8rem;
             cursor: pointer;
             z-index: 10;
-            color: #c0c0c0;
-            border: 1px solid #8b5a2b;
+            color: #888888;
+            border: 1px solid #555555;
+        }
+        body.light-mode .favorite-btn {
+            background: #e0e0e0;
+            color: #aaaaaa;
+            border-color: #cccccc;
         }
         .favorite-btn.favorite-active {
-            color: #8b5a2b;
-            background: #fff0e0;
-            border-color: #8b5a2b;
+            color: #ffffff;
+            background: #555555;
+            border-color: #888888;
         }
+        body.light-mode .favorite-btn.favorite-active {
+            color: #000000;
+            background: #c0c0c0;
+            border-color: #888888;
+        }
+
         .card-title {
             font-family: 'Amiri', serif;
             font-size: 2rem;
             font-weight: 700;
-            color: #5a3a1e;
-            background: #fff1cc;
+            color: #ffffff;
+            background: #333333;
             display: inline-block;
             padding: 8px 25px 8px 60px;
             border-radius: 40px;
             margin-bottom: 20px;
-            border: 1px solid #8b5a2b;
+            border: 1px solid #555555;
         }
+        body.light-mode .card-title {
+            color: #000000;
+            background: #e0e0e0;
+            border-color: #bbbbbb;
+        }
+
         .arabic-text {
             font-family: 'Amiri', serif;
             font-size: 1.9rem;
             line-height: 1.7;
             font-weight: 700;
-            color: #1a0f0a;
-            background: #fff9f0;
+            color: #ffffff;
+            background: #1a1a1a;
             padding: 25px 15px;
             border-radius: 35px;
             margin: 15px 0;
             text-align: center;
-            border: 1px solid #8b5a2b;
+            border: 1px solid #444444;
         }
+        body.light-mode .arabic-text {
+            color: #000000;
+            background: #f0f0f0;
+            border-color: #cccccc;
+        }
+
         .description {
             font-size: 1.3rem;
-            color: #1a0f0a;
-            background: #e6d5b8;
+            color: #ffffff;
+            background: #2a2a2a;
             padding: 12px 20px;
             border-radius: 50px;
             margin: 10px 0 20px;
             text-align: center;
-            border: 1px solid #8b5a2b;
+            border: 1px solid #555555;
         }
+        body.light-mode .description {
+            color: #000000;
+            background: #e8e8e8;
+            border-color: #bbbbbb;
+        }
+
         .copy-btn {
-            background: #8b5a2b;
+            background: #333333;
             border: none;
-            color: #f5e6d3;
+            color: #ffffff;
             font-size: 1.4rem;
             padding: 15px 20px;
             border-radius: 60px;
@@ -260,38 +356,55 @@
             justify-content: center;
             gap: 10px;
             transition: all 0.2s;
-            border: 1px solid #c49a6c;
+            border: 1px solid #555555;
             margin-top: auto;
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
-            box-shadow: 0 8px 0 #5a3a1e;
+            box-shadow: 0 8px 0 #111111;
             width: 100%;
         }
+        body.light-mode .copy-btn {
+            background: #e0e0e0;
+            color: #000000;
+            border-color: #bbbbbb;
+            box-shadow: 0 8px 0 #aaaaaa;
+        }
         .copy-btn:hover {
-            background: #c49a6c;
-            color: #1a0f0a;
+            background: #555555;
+            color: #ffffff;
             transform: translateY(-3px);
-            box-shadow: 0 10px 0 #5a3a1e;
+            box-shadow: 0 10px 0 #222222;
+        }
+        body.light-mode .copy-btn:hover {
+            background: #c0c0c0;
+            color: #000000;
+            box-shadow: 0 10px 0 #888888;
         }
         .copy-btn:active {
             transform: translateY(5px);
-            box-shadow: 0 3px 0 #5a3a1e;
+            box-shadow: 0 3px 0 #222222;
         }
+
         /* رسالة منبثقة */
         .toast {
             position: fixed;
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            background: #2c1a12;
-            color: #f5e6d3;
+            background: #222222;
+            color: #ffffff;
             padding: 16px 40px;
             border-radius: 60px;
             font-size: 1.6rem;
-            box-shadow: 0 10px 30px #000000b3;
-            border: 2px solid #c49a6c;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 2px solid #777777;
             z-index: 1000;
             display: none;
+        }
+        body.light-mode .toast {
+            background: #e0e0e0;
+            color: #000000;
+            border-color: #888888;
         }
         .toast.show {
             display: block;
@@ -303,35 +416,48 @@
             85% { opacity: 1; transform: translateX(-50%) translateY(0); }
             100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
         }
+
         /* رسالة عدم وجود نتائج */
         .no-results {
             text-align: center;
             font-size: 2rem;
-            color: #c49a6c;
-            background: rgba(0,0,0,0.2);
+            color: #cccccc;
+            background: #1a1a1a;
             padding: 40px;
             border-radius: 60px;
             margin-top: 50px;
-            border: 2px dashed #c49a6c;
+            border: 2px dashed #777777;
             display: none;
         }
+        body.light-mode .no-results {
+            color: #333333;
+            background: #f0f0f0;
+            border-color: #aaaaaa;
+        }
+
         footer {
             margin-top: 70px;
             text-align: center;
             font-size: 1.4rem;
-            color: #f5e6d3;
-            background: #2c1a12;
+            color: #ffffff;
+            background: #1a1a1a;
             padding: 20px 40px;
             border-radius: 80px;
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            border: 1px solid #c49a6c;
+            border: 1px solid #555555;
+        }
+        body.light-mode footer {
+            color: #000000;
+            background: #e0e0e0;
+            border-color: #aaaaaa;
         }
         footer i {
-            color: #c49a6c;
+            color: inherit;
             margin: 0 10px;
         }
+
         @media (max-width: 600px) {
             .cat-btn { font-size: 1.2rem; padding: 12px 20px; }
             .favorite-toggle { padding: 12px 20px; font-size: 1.3rem; }
@@ -340,17 +466,21 @@
 </head>
 <body>
     <div class="container">
-        <!-- زر تبديل اللغة -->
-        <div class="lang-switch">
+        <!-- شريط الأزرار العلوي (اللغة + تبديل الوضع) -->
+        <div class="top-bar">
+            <button class="mode-btn" id="modeToggle">
+                <i class="fas fa-moon"></i>
+                <span id="modeText">ليلي</span>
+            </button>
             <button class="lang-btn" id="langToggle">
                 <i class="fas fa-language"></i>
                 <span id="langText">English</span>
             </button>
         </div>
 
-        <!-- الشعار بدون أي حواف أو ظلال -->
+        <!-- الشعار - سيتم تغيير الصورة حسب الوضع -->
         <div class="logo-container">
-            <img src="20260311_211121.png" alt="شعار أذكار" class="logo">
+            <img src="logo-dark.png" alt="شعار أذكار" class="logo" id="logoImg">
         </div>
 
         <!-- شريط البحث والمفضلة -->
@@ -382,7 +512,7 @@
         </div>
 
         <!-- شبكة الأذكار -->
-        <div class="grid visible" id="adhkarGrid"></div>
+        <div class="grid" id="adhkarGrid"></div>
         <div id="noResults" class="no-results">لا توجد نتائج مطابقة</div>
 
         <footer>
@@ -431,6 +561,8 @@
         let currentDuas = ramadanDuas;
         let favorites = JSON.parse(localStorage.getItem('ramadanFavorites')) || [];
         let showFavoritesOnly = false;
+        let currentLang = localStorage.getItem('adhkarLang') || 'ar';
+        let currentMode = localStorage.getItem('adhkarMode') || 'dark'; // dark أو light
 
         const grid = document.getElementById('adhkarGrid');
         const searchInput = document.getElementById('searchInput');
@@ -441,7 +573,12 @@
         const btnEidFitr = document.getElementById('btnEidFitr');
         const btnEidAdha = document.getElementById('btnEidAdha');
         const langToggle = document.getElementById('langToggle');
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        const modeText = document.getElementById('modeText');
+        const logoImg = document.getElementById('logoImg');
 
+        // عناصر الترجمة
         const langElements = {
             searchInput: document.getElementById('searchInput'),
             favToggleText: document.getElementById('favToggleText'),
@@ -464,7 +601,9 @@
                 noResults: "لا توجد نتائج مطابقة",
                 footer: "تقبل الله منا ومنكم",
                 copyToast: "✅ تم النسخ",
-                langToggle: "English"
+                langToggle: "English",
+                modeLight: "نهاري",
+                modeDark: "ليلي"
             },
             en: {
                 searchPlaceholder: "Search for dhikr...",
@@ -475,11 +614,11 @@
                 noResults: "No matching results",
                 footer: "May Allah accept from us and you",
                 copyToast: "✅ Copied",
-                langToggle: "العربية"
+                langToggle: "العربية",
+                modeLight: "Light",
+                modeDark: "Dark"
             }
         };
-
-        let currentLang = 'ar';
 
         function applyLanguage(lang) {
             const t = translations[lang];
@@ -492,8 +631,12 @@
             langElements.footerText.textContent = t.footer;
             langElements.langText.textContent = t.langToggle;
 
+            // تحديث نص زر الوضع حسب اللغة الحالية
+            modeText.textContent = currentMode === 'dark' ? t.modeDark : t.modeLight;
+
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.documentElement.lang = lang;
+            localStorage.setItem('adhkarLang', lang);
         }
 
         langToggle.addEventListener('click', () => {
@@ -501,7 +644,30 @@
             applyLanguage(currentLang);
         });
 
-        // ==================== إدارة المفضلة والبحث ====================
+        // ==================== تبديل الوضع والشعار ====================
+        function applyMode(mode) {
+            if (mode === 'light') {
+                document.body.classList.add('light-mode');
+                modeIcon.className = 'fas fa-sun';
+                modeText.textContent = translations[currentLang].modeLight;
+                // تغيير الشعار لصورة الوضع النهاري
+                logoImg.src = 'logo-light.png';
+            } else {
+                document.body.classList.remove('light-mode');
+                modeIcon.className = 'fas fa-moon';
+                modeText.textContent = translations[currentLang].modeDark;
+                // تغيير الشعار لصورة الوضع الليلي
+                logoImg.src = 'logo-dark.png';
+            }
+            localStorage.setItem('adhkarMode', mode);
+        }
+
+        modeToggle.addEventListener('click', () => {
+            currentMode = currentMode === 'dark' ? 'light' : 'dark';
+            applyMode(currentMode);
+        });
+
+        // ==================== المفضلة والبحث ====================
         function saveFavorites() {
             localStorage.setItem('ramadanFavorites', JSON.stringify(favorites));
         }
@@ -631,8 +797,10 @@
             filterAndRender();
         });
 
+        // التهيئة
         filterAndRender();
-        applyLanguage('ar');
+        applyLanguage(currentLang);
+        applyMode(currentMode);
     </script>
 </body>
 </html>
