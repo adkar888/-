@@ -651,13 +651,13 @@
                 modeIcon.className = 'fas fa-sun';
                 modeText.textContent = translations[currentLang].modeLight;
                 // تغيير الشعار لصورة الوضع النهاري
-                logoImg.src = 'logo-light.png';
+                logoImg.src = 'black.png';
             } else {
                 document.body.classList.remove('light-mode');
                 modeIcon.className = 'fas fa-moon';
                 modeText.textContent = translations[currentLang].modeDark;
                 // تغيير الشعار لصورة الوضع الليلي
-                logoImg.src = 'logo-dark.png';
+                logoImg.src = 'white.png';
             }
             localStorage.setItem('adhkarMode', mode);
         }
